@@ -80,6 +80,7 @@
             btnLogin.TabIndex = 4;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.Click += this.btnLogin_Click;
             // 
             // FormLogin
             // 

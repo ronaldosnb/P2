@@ -6,5 +6,11 @@ namespace P2
         {
             InitializeComponent();
         }
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            FormPrincipal tela = new FormPrincipal();
+            tela.Show();
+        }
+
     }
 }
