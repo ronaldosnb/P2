@@ -34,6 +34,7 @@
             btnProdutos = new ToolStripMenuItem();
             btnPedidos = new ToolStripMenuItem();
             btnUsuarios = new ToolStripMenuItem();
+            toolStripMenuItem1 = new ToolStripMenuItem();
             menuStrip2.SuspendLayout();
             SuspendLayout();
             // 
@@ -42,7 +43,7 @@
             menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Location = new Point(0, 33);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1226, 24);
+            menuStrip1.Size = new Size(938, 24);
             menuStrip1.TabIndex = 4;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -50,10 +51,10 @@
             // 
             menuStrip2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             menuStrip2.ImageScalingSize = new Size(20, 20);
-            menuStrip2.Items.AddRange(new ToolStripItem[] { btnClientes, btnProdutos, btnPedidos, btnUsuarios });
+            menuStrip2.Items.AddRange(new ToolStripItem[] { btnClientes, btnProdutos, btnPedidos, btnUsuarios, toolStripMenuItem1 });
             menuStrip2.Location = new Point(0, 0);
             menuStrip2.Name = "menuStrip2";
-            menuStrip2.Size = new Size(1226, 33);
+            menuStrip2.Size = new Size(938, 33);
             menuStrip2.TabIndex = 5;
             menuStrip2.Text = "menuStrip2";
             // 
@@ -80,12 +81,18 @@
             btnUsuarios.Name = "btnUsuarios";
             btnUsuarios.Size = new Size(162, 29);
             btnUsuarios.Text = "Cadastrar usarios";
+            btnUsuarios.Click += btnUsuarios_Click;
+            // 
+            // toolStripMenuItem1
+            // 
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new Size(14, 29);
             // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1226, 652);
+            ClientSize = new Size(938, 429);
             Controls.Add(menuStrip1);
             Controls.Add(menuStrip2);
             MainMenuStrip = menuStrip1;
@@ -107,5 +114,6 @@
         private ToolStripMenuItem btnProdutos;
         private ToolStripMenuItem btnPedidos;
         private ToolStripMenuItem btnUsuarios;
+        private ToolStripMenuItem toolStripMenuItem1;
     }
 }

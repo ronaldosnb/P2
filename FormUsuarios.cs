@@ -10,14 +10,19 @@ using System.Windows.Forms;
 
 namespace P2
 {
-    public partial class FormPrincipal : Form
+    public partial class FormUsuarios : Form
     {
-        public FormPrincipal()
+        public FormUsuarios()
         {
             InitializeComponent();
         }
 
-        private void btnUsuarios_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }
