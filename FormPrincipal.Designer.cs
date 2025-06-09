@@ -35,15 +35,17 @@
             btnPedidos = new ToolStripMenuItem();
             btnUsuarios = new ToolStripMenuItem();
             toolStripMenuItem1 = new ToolStripMenuItem();
+            consultarPedidosToolStripMenuItem = new ToolStripMenuItem();
             menuStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Location = new Point(0, 33);
+            menuStrip1.Location = new Point(0, 28);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(938, 24);
+            menuStrip1.Padding = new Padding(5, 2, 0, 2);
+            menuStrip1.Size = new Size(821, 24);
             menuStrip1.TabIndex = 4;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -51,51 +53,59 @@
             // 
             menuStrip2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             menuStrip2.ImageScalingSize = new Size(20, 20);
-            menuStrip2.Items.AddRange(new ToolStripItem[] { btnClientes, btnProdutos, btnPedidos, btnUsuarios, toolStripMenuItem1 });
+            menuStrip2.Items.AddRange(new ToolStripItem[] { btnClientes, btnProdutos, btnPedidos, btnUsuarios, toolStripMenuItem1, consultarPedidosToolStripMenuItem });
             menuStrip2.Location = new Point(0, 0);
             menuStrip2.Name = "menuStrip2";
-            menuStrip2.Size = new Size(938, 33);
+            menuStrip2.Padding = new Padding(5, 2, 0, 2);
+            menuStrip2.Size = new Size(821, 28);
             menuStrip2.TabIndex = 5;
             menuStrip2.Text = "menuStrip2";
             // 
             // btnClientes
             // 
             btnClientes.Name = "btnClientes";
-            btnClientes.Size = new Size(164, 29);
+            btnClientes.Size = new Size(138, 24);
             btnClientes.Text = "Cadastrar clientes";
             // 
             // btnProdutos
             // 
             btnProdutos.Name = "btnProdutos";
-            btnProdutos.Size = new Size(180, 29);
+            btnProdutos.Size = new Size(148, 24);
             btnProdutos.Text = "Cadastrar produtos";
             // 
             // btnPedidos
             // 
             btnPedidos.Name = "btnPedidos";
-            btnPedidos.Size = new Size(171, 29);
+            btnPedidos.Size = new Size(142, 24);
             btnPedidos.Text = "Cadastrar pedidos";
             // 
             // btnUsuarios
             // 
             btnUsuarios.Name = "btnUsuarios";
-            btnUsuarios.Size = new Size(162, 29);
+            btnUsuarios.Size = new Size(134, 24);
             btnUsuarios.Text = "Cadastrar usarios";
             btnUsuarios.Click += btnUsuarios_Click;
             // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(14, 29);
+            toolStripMenuItem1.Size = new Size(12, 24);
+            // 
+            // consultarPedidosToolStripMenuItem
+            // 
+            consultarPedidosToolStripMenuItem.Name = "consultarPedidosToolStripMenuItem";
+            consultarPedidosToolStripMenuItem.Size = new Size(141, 24);
+            consultarPedidosToolStripMenuItem.Text = "Consultar pedidos";
             // 
             // FormPrincipal
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(938, 429);
+            ClientSize = new Size(821, 322);
             Controls.Add(menuStrip1);
             Controls.Add(menuStrip2);
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             Name = "FormPrincipal";
             Text = "FormPrincipal";
@@ -115,5 +125,6 @@
         private ToolStripMenuItem btnPedidos;
         private ToolStripMenuItem btnUsuarios;
         private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem consultarPedidosToolStripMenuItem;
     }
 }
