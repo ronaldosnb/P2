@@ -41,11 +41,11 @@
             btnExcluir = new Button();
             txtUsuarioAtualizar = new TextBox();
             label4 = new Label();
-            dataGridView1 = new DataGridView();
+            dataUsuarios = new DataGridView();
             usuario = new Label();
-            textBox1 = new TextBox();
+            txtBuscar = new TextBox();
             btnBuscar = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataUsuarios).BeginInit();
             SuspendLayout();
             // 
             // txtNovoUsuario
@@ -178,13 +178,15 @@
             label4.TabIndex = 15;
             label4.Text = "Usuario";
             // 
-            // dataGridView1
+            // dataUsuarios
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(263, 58);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(546, 342);
-            dataGridView1.TabIndex = 16;
+            dataUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataUsuarios.Location = new Point(263, 58);
+            dataUsuarios.Name = "dataUsuarios";
+            dataUsuarios.ReadOnly = true;
+            dataUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataUsuarios.Size = new Size(546, 342);
+            dataUsuarios.TabIndex = 16;
             // 
             // usuario
             // 
@@ -196,12 +198,12 @@
             usuario.TabIndex = 17;
             usuario.Text = "Usuario";
             // 
-            // textBox1
+            // txtBuscar
             // 
-            textBox1.Location = new Point(328, 23);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 18;
+            txtBuscar.Location = new Point(328, 23);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.Size = new Size(100, 23);
+            txtBuscar.TabIndex = 18;
             // 
             // btnBuscar
             // 
@@ -211,6 +213,7 @@
             btnBuscar.TabIndex = 19;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
             // 
             // FormUsuarios
             // 
@@ -218,9 +221,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(821, 436);
             Controls.Add(btnBuscar);
-            Controls.Add(textBox1);
+            Controls.Add(txtBuscar);
             Controls.Add(usuario);
-            Controls.Add(dataGridView1);
+            Controls.Add(dataUsuarios);
             Controls.Add(label4);
             Controls.Add(txtUsuarioAtualizar);
             Controls.Add(btnExcluir);
@@ -237,7 +240,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "FormUsuarios";
             Text = "FormUsuarios";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataUsuarios).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -257,9 +260,9 @@
         private Button btnExcluir;
         private TextBox txtUsuarioAtualizar;
         private Label label4;
-        private DataGridView dataGridView1;
+        private DataGridView dataUsuarios;
         private Label usuario;
-        private TextBox textBox1;
+        private TextBox txtBuscar;
         private Button btnBuscar;
     }
 }
