@@ -7,14 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using P2.Functions;
 
 namespace P2
 {
     public partial class FormPrincipal : Form
     {
-        public FormPrincipal()
+        private string usuarioLogado;
+
+        public FormPrincipal(string usuario)
         {
             InitializeComponent();
+            usuarioLogado = usuario;
         }
 
         private void btnUsuarios_Click(object sender, EventArgs e)
@@ -46,6 +50,32 @@ namespace P2
             ConsultarPedidos form = new ConsultarPedidos();
             form.ShowDialog();
         }
+
+        private void FormPrincipal_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void btnAtualizarSenha_Click(object sender, EventArgs e)
+        {
+            string novaSenha = txtNovaSenha.Text.Trim();
+
+            if (string.IsNullOrEmpty(novaSenha))
+            {
+                MessageBox.Show("Digite a nova senha.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            bool sucesso = CrudUtils.AtualizarSenhaDireto(usuarioLogado, novaSenha);
+
+            if (sucesso)
+            {
+                MessageBox.Show("Senha atualizada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtNovaSenha.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Erro ao atualizar a senha.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
-

@@ -36,6 +36,10 @@
             btnUsuarios = new ToolStripMenuItem();
             toolStripMenuItem1 = new ToolStripMenuItem();
             btnConsultarPedidos = new ToolStripMenuItem();
+            label1 = new Label();
+            txtNovaSenha = new TextBox();
+            btnAtualizarSenha = new Button();
+            label2 = new Label();
             menuStrip2.SuspendLayout();
             SuspendLayout();
             // 
@@ -101,11 +105,54 @@
             btnConsultarPedidos.Text = "Consultar pedidos";
             btnConsultarPedidos.Click += btnConsultarPedidos_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14.25F);
+            label1.Location = new Point(18, 66);
+            label1.Name = "label1";
+            label1.Size = new Size(200, 25);
+            label1.TabIndex = 6;
+            label1.Text = "Atualizar minha senha";
+            // 
+            // txtNovaSenha
+            // 
+            txtNovaSenha.Font = new Font("Segoe UI", 12F);
+            txtNovaSenha.Location = new Point(18, 132);
+            txtNovaSenha.Name = "txtNovaSenha";
+            txtNovaSenha.Size = new Size(200, 29);
+            txtNovaSenha.TabIndex = 7;
+            // 
+            // btnAtualizarSenha
+            // 
+            btnAtualizarSenha.Font = new Font("Segoe UI", 12F);
+            btnAtualizarSenha.Location = new Point(18, 167);
+            btnAtualizarSenha.Name = "btnAtualizarSenha";
+            btnAtualizarSenha.Size = new Size(105, 33);
+            btnAtualizarSenha.TabIndex = 8;
+            btnAtualizarSenha.Text = "Atualizar";
+            btnAtualizarSenha.UseVisualStyleBackColor = true;
+            btnAtualizarSenha.Click += btnAtualizarSenha_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(18, 108);
+            label2.Name = "label2";
+            label2.Size = new Size(95, 21);
+            label2.TabIndex = 9;
+            label2.Text = "Nova senha:";
+            // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(821, 322);
+            Controls.Add(label2);
+            Controls.Add(btnAtualizarSenha);
+            Controls.Add(txtNovaSenha);
+            Controls.Add(label1);
             Controls.Add(menuStrip1);
             Controls.Add(menuStrip2);
             MainMenuStrip = menuStrip1;
@@ -114,6 +161,7 @@
             Name = "FormPrincipal";
             Text = "FormPrincipal";
             WindowState = FormWindowState.Maximized;
+            Load += FormPrincipal_Load;
             menuStrip2.ResumeLayout(false);
             menuStrip2.PerformLayout();
             ResumeLayout(false);
@@ -130,5 +178,9 @@
         private ToolStripMenuItem btnUsuarios;
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem btnConsultarPedidos;
+        private Label label1;
+        private TextBox txtNovaSenha;
+        private Button btnAtualizarSenha;
+        private Label label2;
     }
 }

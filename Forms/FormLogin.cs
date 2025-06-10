@@ -20,7 +20,8 @@ namespace P2
             if (acessoLiberado)
             {
                 MessageBox.Show("Login realizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                FormPrincipal formPrincipal = new FormPrincipal();
+
+                FormPrincipal formPrincipal = new FormPrincipal(usuario);
                 formPrincipal.Show();
                 this.Hide();
             }
@@ -32,7 +33,7 @@ namespace P2
 
         private void FormLogin_Load(object sender, EventArgs e)
         {
-                CsvUtils.VerificarOuCriarArquivosCsv();
+            CsvUtils.VerificarOuCriarArquivosCsv();
         }
     }
 }
