@@ -179,6 +179,39 @@ namespace P2.Functions
 
             return false;
         }
+        public static bool AtualizarCampoCsv(string caminhoArquivo, string identificador, int indiceIdentificador, int indiceCampoParaAtualizar, string novoValor, bool temCabecalho = true)
+        {
+            if (!File.Exists(caminhoArquivo))
+                return false;
+
+            List<string> linhas = File.ReadAllLines(caminhoArquivo).ToList();
+            int linhaInicial = temCabecalho ? 1 : 0;
+            bool atualizado = false;
+
+            for (int i = linhaInicial; i < linhas.Count; i++)
+            {
+                var partes = linhas[i].Split(';');
+
+                if (indiceIdentificador < partes.Length && partes[indiceIdentificador].Equals(identificador, StringComparison.OrdinalIgnoreCase))
+                {
+                    if (indiceCampoParaAtualizar < partes.Length)
+                    {
+                        partes[indiceCampoParaAtualizar] = novoValor;
+                        linhas[i] = string.Join(";", partes);
+                        atualizado = true;
+                        break;
+                    }
+                }
+            }
+
+            if (atualizado)
+            {
+                File.WriteAllLines(caminhoArquivo, linhas);
+                return true;
+            }
+
+            return false;
+        }
 
 
     }

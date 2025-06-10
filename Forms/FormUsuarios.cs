@@ -115,7 +115,7 @@ namespace P2
                 if (sucesso)
                 {
                     MessageBox.Show("Usuário excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CarregarUsuarios(); // Atualiza o DataGridView (crie essa função se ainda não tiver)
+                    CarregarUsuarios();
                 }
                 else
                 {
@@ -124,5 +124,48 @@ namespace P2
             }
         }
 
+        private void btnAtualizarSenha_Click(object sender, EventArgs e)
+        {
+            string usuario = txtUsuarioAtualizar.Text.Trim();
+            string novaSenha = txtSenhaAtualizar.Text.Trim();
+
+            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(novaSenha))
+            {
+                MessageBox.Show("Preencha os campos para atualizar a senha.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string caminhoArquivo = Path.Combine("Database", "usuarios.csv");
+
+            bool sucesso = CrudUtils.AtualizarCampoCsv(
+                caminhoArquivo: caminhoArquivo,
+                identificador: usuario,
+                indiceIdentificador: 0,
+                indiceCampoParaAtualizar: 1,
+                novoValor: novaSenha
+            );
+
+            if (sucesso)
+            {
+                MessageBox.Show("Senha atualizada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CarregarUsuarios();
+            }
+            else
+            {
+                MessageBox.Show("Erro ao atualizar a senha.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dataUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dataUsuarios.Rows[e.RowIndex].Cells[0].Value != null)
+            {
+                string usuario = dataUsuarios.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string senha = dataUsuarios.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+                txtUsuarioAtualizar.Text = usuario;
+                txtSenhaAtualizar.Text = senha;
+            }
+        }
     }
 }
