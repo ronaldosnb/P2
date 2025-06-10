@@ -57,7 +57,7 @@
             // 
             menuStrip2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             menuStrip2.ImageScalingSize = new Size(20, 20);
-            menuStrip2.Items.AddRange(new ToolStripItem[] { btnClientes, btnProdutos, btnPedidos, btnUsuarios, toolStripMenuItem1, btnConsultarPedidos });
+            menuStrip2.Items.AddRange(new ToolStripItem[] { btnUsuarios, btnClientes, btnProdutos, btnPedidos, toolStripMenuItem1, btnConsultarPedidos });
             menuStrip2.Location = new Point(0, 0);
             menuStrip2.Name = "menuStrip2";
             menuStrip2.Padding = new Padding(5, 2, 0, 2);

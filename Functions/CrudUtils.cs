@@ -48,7 +48,7 @@ namespace P2.Functions
             List<string> linhas = File.ReadAllLines(caminhoArquivo).ToList();
             bool atualizado = false;
 
-            for (int i = 1; i < linhas.Count; i++) 
+            for (int i = 1; i < linhas.Count; i++) // Assume que há cabeçalho
             {
                 string[] partes = linhas[i].Split(';');
 

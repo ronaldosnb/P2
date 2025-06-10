@@ -31,5 +31,10 @@ namespace P2
         {
 
         }
+
+        private void btnCadastrar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

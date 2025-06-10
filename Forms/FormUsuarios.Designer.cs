@@ -28,40 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            txtUsuario = new TextBox();
-            txtSenha = new TextBox();
+            txtNovoUsuario = new TextBox();
+            txtNovaSenha = new TextBox();
             btnCadastrar = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             btnAtualizar = new Button();
-            txtAtualizarSenha = new TextBox();
+            txtSenhaAtualizar = new TextBox();
             label5 = new Label();
             label6 = new Label();
-            dataGridView1 = new DataGridView();
-            button1 = new Button();
-            txtAtualizarUsuario = new TextBox();
+            btnExcluir = new Button();
+            txtUsuarioAtualizar = new TextBox();
             label4 = new Label();
+            dataGridView1 = new DataGridView();
+            usuario = new Label();
+            textBox1 = new TextBox();
+            btnBuscar = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
-            // txtUsuario
+            // txtNovoUsuario
             // 
-            txtUsuario.Font = new Font("Segoe UI", 10.8F);
-            txtUsuario.Location = new Point(29, 82);
-            txtUsuario.Margin = new Padding(3, 2, 3, 2);
-            txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(181, 27);
-            txtUsuario.TabIndex = 0;
+            txtNovoUsuario.Font = new Font("Segoe UI", 10.8F);
+            txtNovoUsuario.Location = new Point(29, 82);
+            txtNovoUsuario.Margin = new Padding(3, 2, 3, 2);
+            txtNovoUsuario.Name = "txtNovoUsuario";
+            txtNovoUsuario.Size = new Size(181, 27);
+            txtNovoUsuario.TabIndex = 0;
             // 
-            // txtSenha
+            // txtNovaSenha
             // 
-            txtSenha.Font = new Font("Segoe UI", 10.8F);
-            txtSenha.Location = new Point(29, 137);
-            txtSenha.Margin = new Padding(3, 2, 3, 2);
-            txtSenha.Name = "txtSenha";
-            txtSenha.Size = new Size(181, 27);
-            txtSenha.TabIndex = 1;
+            txtNovaSenha.Font = new Font("Segoe UI", 10.8F);
+            txtNovaSenha.Location = new Point(29, 137);
+            txtNovaSenha.Margin = new Padding(3, 2, 3, 2);
+            txtNovaSenha.Name = "txtNovaSenha";
+            txtNovaSenha.Size = new Size(181, 27);
+            txtNovaSenha.TabIndex = 1;
             // 
             // btnCadastrar
             // 
@@ -73,6 +76,7 @@
             btnCadastrar.TabIndex = 2;
             btnCadastrar.Text = "Cadastrar";
             btnCadastrar.UseVisualStyleBackColor = true;
+            btnCadastrar.Click += btnCadastrar_Click;
             // 
             // label1
             // 
@@ -116,14 +120,14 @@
             btnAtualizar.Text = "Atualizar";
             btnAtualizar.UseVisualStyleBackColor = true;
             // 
-            // txtAtualizarSenha
+            // txtSenhaAtualizar
             // 
-            txtAtualizarSenha.Font = new Font("Segoe UI", 10.8F);
-            txtAtualizarSenha.Location = new Point(29, 344);
-            txtAtualizarSenha.Margin = new Padding(3, 2, 3, 2);
-            txtAtualizarSenha.Name = "txtAtualizarSenha";
-            txtAtualizarSenha.Size = new Size(181, 27);
-            txtAtualizarSenha.TabIndex = 6;
+            txtSenhaAtualizar.Font = new Font("Segoe UI", 10.8F);
+            txtSenhaAtualizar.Location = new Point(29, 344);
+            txtSenhaAtualizar.Margin = new Padding(3, 2, 3, 2);
+            txtSenhaAtualizar.Name = "txtSenhaAtualizar";
+            txtSenhaAtualizar.Size = new Size(181, 27);
+            txtSenhaAtualizar.TabIndex = 6;
             // 
             // label5
             // 
@@ -147,32 +151,22 @@
             label6.Text = "Atualizar senha";
             label6.Click += label6_Click;
             // 
-            // dataGridView1
+            // btnExcluir
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(263, 9);
-            dataGridView1.Margin = new Padding(3, 2, 3, 2);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(546, 392);
-            dataGridView1.TabIndex = 12;
+            btnExcluir.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnExcluir.Location = new Point(263, 406);
+            btnExcluir.Name = "btnExcluir";
+            btnExcluir.Size = new Size(100, 26);
+            btnExcluir.TabIndex = 13;
+            btnExcluir.Text = "Excluir";
+            btnExcluir.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // txtUsuarioAtualizar
             // 
-            button1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(263, 406);
-            button1.Name = "button1";
-            button1.Size = new Size(100, 26);
-            button1.TabIndex = 13;
-            button1.Text = "Excluir";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // txtAtualizarUsuario
-            // 
-            txtAtualizarUsuario.Location = new Point(29, 295);
-            txtAtualizarUsuario.Name = "txtAtualizarUsuario";
-            txtAtualizarUsuario.Size = new Size(181, 23);
-            txtAtualizarUsuario.TabIndex = 14;
+            txtUsuarioAtualizar.Location = new Point(29, 295);
+            txtUsuarioAtualizar.Name = "txtUsuarioAtualizar";
+            txtUsuarioAtualizar.Size = new Size(181, 23);
+            txtUsuarioAtualizar.TabIndex = 14;
             // 
             // label4
             // 
@@ -184,25 +178,62 @@
             label4.TabIndex = 15;
             label4.Text = "Usuario";
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(263, 58);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(546, 342);
+            dataGridView1.TabIndex = 16;
+            // 
+            // usuario
+            // 
+            usuario.AutoSize = true;
+            usuario.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            usuario.Location = new Point(263, 26);
+            usuario.Name = "usuario";
+            usuario.Size = new Size(59, 20);
+            usuario.TabIndex = 17;
+            usuario.Text = "Usuario";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(328, 23);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 18;
+            // 
+            // btnBuscar
+            // 
+            btnBuscar.Location = new Point(444, 23);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(75, 23);
+            btnBuscar.TabIndex = 19;
+            btnBuscar.Text = "Buscar";
+            btnBuscar.UseVisualStyleBackColor = true;
+            // 
             // FormUsuarios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(821, 436);
-            Controls.Add(label4);
-            Controls.Add(txtAtualizarUsuario);
-            Controls.Add(button1);
+            Controls.Add(btnBuscar);
+            Controls.Add(textBox1);
+            Controls.Add(usuario);
             Controls.Add(dataGridView1);
+            Controls.Add(label4);
+            Controls.Add(txtUsuarioAtualizar);
+            Controls.Add(btnExcluir);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label3);
             Controls.Add(btnAtualizar);
-            Controls.Add(txtAtualizarSenha);
+            Controls.Add(txtSenhaAtualizar);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(btnCadastrar);
-            Controls.Add(txtSenha);
-            Controls.Add(txtUsuario);
+            Controls.Add(txtNovaSenha);
+            Controls.Add(txtNovoUsuario);
             Margin = new Padding(3, 2, 3, 2);
             Name = "FormUsuarios";
             Text = "FormUsuarios";
@@ -213,19 +244,22 @@
 
         #endregion
 
-        private TextBox txtUsuario;
-        private TextBox txtSenha;
+        private TextBox txtNovoUsuario;
+        private TextBox txtNovaSenha;
         private Button btnCadastrar;
         private Label label1;
         private Label label2;
         private Label label3;
         private Button btnAtualizar;
-        private TextBox txtAtualizarSenha;
+        private TextBox txtSenhaAtualizar;
         private Label label5;
         private Label label6;
-        private DataGridView dataGridView1;
-        private Button button1;
-        private TextBox txtAtualizarUsuario;
+        private Button btnExcluir;
+        private TextBox txtUsuarioAtualizar;
         private Label label4;
+        private DataGridView dataGridView1;
+        private Label usuario;
+        private TextBox textBox1;
+        private Button btnBuscar;
     }
 }
