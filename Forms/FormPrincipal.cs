@@ -19,7 +19,33 @@ namespace P2
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
+            FormUsuarios form = new FormUsuarios();
+            form.ShowDialog();
+        }
 
+        private void btnClientes_Click(object sender, EventArgs e)
+        {
+            FormClientes form = new FormClientes();
+            form.ShowDialog();
+        }
+
+        private void btnProdutos_Click(object sender, EventArgs e)
+        {
+            FormProdutos form = new FormProdutos();
+            form.ShowDialog();
+        }
+
+        private void btnPedidos_Click(object sender, EventArgs e)
+        {
+            FormPedidos form = new FormPedidos();
+            form.ShowDialog();
+        }
+
+        private void btnConsultarPedidos_Click(object sender, EventArgs e)
+        {
+            ConsultarPedidos form = new ConsultarPedidos();
+            form.ShowDialog();
         }
     }
 }
+

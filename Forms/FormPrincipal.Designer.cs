@@ -35,7 +35,7 @@
             btnPedidos = new ToolStripMenuItem();
             btnUsuarios = new ToolStripMenuItem();
             toolStripMenuItem1 = new ToolStripMenuItem();
-            consultarPedidosToolStripMenuItem = new ToolStripMenuItem();
+            btnConsultarPedidos = new ToolStripMenuItem();
             menuStrip2.SuspendLayout();
             SuspendLayout();
             // 
@@ -53,7 +53,7 @@
             // 
             menuStrip2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             menuStrip2.ImageScalingSize = new Size(20, 20);
-            menuStrip2.Items.AddRange(new ToolStripItem[] { btnClientes, btnProdutos, btnPedidos, btnUsuarios, toolStripMenuItem1, consultarPedidosToolStripMenuItem });
+            menuStrip2.Items.AddRange(new ToolStripItem[] { btnClientes, btnProdutos, btnPedidos, btnUsuarios, toolStripMenuItem1, btnConsultarPedidos });
             menuStrip2.Location = new Point(0, 0);
             menuStrip2.Name = "menuStrip2";
             menuStrip2.Padding = new Padding(5, 2, 0, 2);
@@ -66,18 +66,21 @@
             btnClientes.Name = "btnClientes";
             btnClientes.Size = new Size(138, 24);
             btnClientes.Text = "Cadastrar clientes";
+            btnClientes.Click += btnClientes_Click;
             // 
             // btnProdutos
             // 
             btnProdutos.Name = "btnProdutos";
             btnProdutos.Size = new Size(148, 24);
             btnProdutos.Text = "Cadastrar produtos";
+            btnProdutos.Click += btnProdutos_Click;
             // 
             // btnPedidos
             // 
             btnPedidos.Name = "btnPedidos";
             btnPedidos.Size = new Size(142, 24);
             btnPedidos.Text = "Cadastrar pedidos";
+            btnPedidos.Click += btnPedidos_Click;
             // 
             // btnUsuarios
             // 
@@ -91,11 +94,12 @@
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(12, 24);
             // 
-            // consultarPedidosToolStripMenuItem
+            // btnConsultarPedidos
             // 
-            consultarPedidosToolStripMenuItem.Name = "consultarPedidosToolStripMenuItem";
-            consultarPedidosToolStripMenuItem.Size = new Size(141, 24);
-            consultarPedidosToolStripMenuItem.Text = "Consultar pedidos";
+            btnConsultarPedidos.Name = "btnConsultarPedidos";
+            btnConsultarPedidos.Size = new Size(141, 24);
+            btnConsultarPedidos.Text = "Consultar pedidos";
+            btnConsultarPedidos.Click += btnConsultarPedidos_Click;
             // 
             // FormPrincipal
             // 
@@ -125,6 +129,6 @@
         private ToolStripMenuItem btnPedidos;
         private ToolStripMenuItem btnUsuarios;
         private ToolStripMenuItem toolStripMenuItem1;
-        private ToolStripMenuItem consultarPedidosToolStripMenuItem;
+        private ToolStripMenuItem btnConsultarPedidos;
     }
 }
