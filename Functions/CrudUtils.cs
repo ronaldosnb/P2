@@ -145,12 +145,41 @@ namespace P2.Functions
                 string[] partes = linhas[i].Split(';');
                 if (indiceColuna < partes.Length && partes[indiceColuna].Equals(termoBusca, StringComparison.OrdinalIgnoreCase))
                 {
-                    return i - linhaInicial; // Retorna o índice da linha no DataGridView (sem cabeçalho)
+                    return i - linhaInicial;
                 }
             }
 
-            return -1; // Não encontrado
+            return -1;
         }
+        public static bool ExcluirRegistroPorIdentificador(string caminhoArquivo, string identificador, int indiceColuna, bool temCabecalho = true)
+        {
+            if (!File.Exists(caminhoArquivo))
+                return false;
+
+            List<string> linhas = File.ReadAllLines(caminhoArquivo).ToList();
+            int linhaInicial = temCabecalho ? 1 : 0;
+            bool removido = false;
+
+            for (int i = linhaInicial; i < linhas.Count; i++)
+            {
+                var partes = linhas[i].Split(';');
+                if (indiceColuna < partes.Length && partes[indiceColuna].Equals(identificador, StringComparison.OrdinalIgnoreCase))
+                {
+                    linhas.RemoveAt(i);
+                    removido = true;
+                    break;
+                }
+            }
+
+            if (removido)
+            {
+                File.WriteAllLines(caminhoArquivo, linhas);
+                return true;
+            }
+
+            return false;
+        }
+
 
     }
 }

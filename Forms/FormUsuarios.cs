@@ -10,7 +10,7 @@ namespace P2
         public FormUsuarios()
         {
             InitializeComponent();
-            CarregarUsuarios(); // Carrega os usuários ao abrir o formulário
+            CarregarUsuarios();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace P2
                 MessageBox.Show("Usuário cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtNovoUsuario.Clear();
                 txtNovaSenha.Clear();
-                CarregarUsuarios(); // Atualiza a tabela após cadastro
+                CarregarUsuarios();
             }
             else
             {
@@ -54,7 +54,6 @@ namespace P2
             }
         }
 
-        // ✅ Função para carregar os usuários no DataGridView
         private void CarregarUsuarios()
         {
             string caminho = System.IO.Path.Combine("Database", "usuarios.csv");
@@ -75,7 +74,7 @@ namespace P2
             }
 
             string caminhoArquivo = Path.Combine("Database", "usuarios.csv");
-            int indiceEncontrado = CrudUtils.BuscarIndiceRegistro(caminhoArquivo, termoBusca, 0); // coluna 0 = usuário
+            int indiceEncontrado = CrudUtils.BuscarIndiceRegistro(caminhoArquivo, termoBusca, 0);
 
             if (indiceEncontrado >= 0 && indiceEncontrado < dataUsuarios.Rows.Count)
             {
@@ -86,6 +85,42 @@ namespace P2
             else
             {
                 MessageBox.Show("Usuário não encontrado.", "Resultado da Busca", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if (dataUsuarios.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecione um usuário para excluir.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var linhaSelecionada = dataUsuarios.SelectedRows[0];
+            string usuarioSelecionado = linhaSelecionada.Cells[0].Value.ToString();
+
+            if (usuarioSelecionado.Equals("ADMIN", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("O usuário ADMIN não pode ser excluído.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirmar = MessageBox.Show($"Deseja realmente excluir o usuário '{usuarioSelecionado}'?", "Confirmar Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirmar == DialogResult.Yes)
+            {
+                string caminhoArquivo = Path.Combine("Database", "usuarios.csv");
+                bool sucesso = CrudUtils.ExcluirRegistroPorIdentificador(caminhoArquivo, usuarioSelecionado, 0); // Coluna 0 = usuário
+
+                if (sucesso)
+                {
+                    MessageBox.Show("Usuário excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CarregarUsuarios(); // Atualiza o DataGridView (crie essa função se ainda não tiver)
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao excluir o usuário.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
