@@ -8,4 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="ViaCep" Version="4.1.511" />
+  </ItemGroup>
+
 </Project>
