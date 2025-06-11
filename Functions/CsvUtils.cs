@@ -45,10 +45,10 @@ namespace P2.Functions
                                 sw.WriteLine("Codigo;Nome;Preco;Descricao");
                                 break;
                             case "pedidos.csv":
-                                sw.WriteLine("CodigoPedido;CpfCliente;Data;Total");
+                                sw.WriteLine("codigoPedido;cpf;nomeCliente;valorTotal");
                                 break;
                             case "itens_pedido.csv":
-                                sw.WriteLine("CodigoPedido;CodigoProduto;Quantidade;PrecoUnitario;Subtotal");
+                                sw.WriteLine("codigoPedido;codigoProduto;nomeProduto;preco;quantidade;subtotal");
                                 break;
                         }
                     }

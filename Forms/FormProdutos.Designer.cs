@@ -51,6 +51,7 @@
             dataProdutos.Name = "dataProdutos";
             dataProdutos.Size = new Size(462, 340);
             dataProdutos.TabIndex = 0;
+            dataProdutos.CellContentClick += dataProdutos_CellContentClick;
             dataProdutos.SelectionChanged += dataProdutos_SelectionChanged;
             // 
             // label1
