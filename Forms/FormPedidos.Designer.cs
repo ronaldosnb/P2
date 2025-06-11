@@ -50,8 +50,12 @@
             pedido = new Label();
             label10 = new Label();
             label11 = new Label();
+            dataPedidos = new DataGridView();
+            btnExcluir = new Button();
+            label9 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridItens).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataProdutos).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataPedidos).BeginInit();
             SuspendLayout();
             // 
             // txtQuantidade
@@ -225,11 +229,11 @@
             // pedido
             // 
             pedido.AutoSize = true;
-            pedido.Location = new Point(427, 300);
+            pedido.Location = new Point(398, 300);
             pedido.Name = "pedido";
-            pedido.Size = new Size(55, 20);
+            pedido.Size = new Size(121, 20);
             pedido.TabIndex = 24;
-            pedido.Text = "Pedido";
+            pedido.Text = "Pedido na sacola";
             // 
             // label10
             // 
@@ -249,11 +253,41 @@
             label11.TabIndex = 26;
             label11.Text = "Adicionar produtos";
             // 
+            // dataPedidos
+            // 
+            dataPedidos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataPedidos.Location = new Point(709, 77);
+            dataPedidos.Name = "dataPedidos";
+            dataPedidos.Size = new Size(417, 425);
+            dataPedidos.TabIndex = 27;
+            // 
+            // btnExcluir
+            // 
+            btnExcluir.Location = new Point(709, 508);
+            btnExcluir.Name = "btnExcluir";
+            btnExcluir.Size = new Size(103, 27);
+            btnExcluir.TabIndex = 28;
+            btnExcluir.Text = "Excluir";
+            btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(854, 54);
+            label9.Name = "label9";
+            label9.Size = new Size(126, 20);
+            label9.TabIndex = 29;
+            label9.Text = "Pedidos gravados";
+            // 
             // FormPedidos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1138, 547);
+            ClientSize = new Size(1148, 547);
+            Controls.Add(label9);
+            Controls.Add(btnExcluir);
+            Controls.Add(dataPedidos);
             Controls.Add(label11);
             Controls.Add(label10);
             Controls.Add(pedido);
@@ -282,6 +316,7 @@
             Load += FormPedidos_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridItens).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataProdutos).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataPedidos).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -310,5 +345,8 @@
         private Label pedido;
         private Label label10;
         private Label label11;
+        private DataGridView dataPedidos;
+        private Button btnExcluir;
+        private Label label9;
     }
 }

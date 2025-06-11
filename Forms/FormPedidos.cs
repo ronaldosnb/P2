@@ -34,11 +34,20 @@ namespace P2
             }
         }
 
+
+
+
         private void FormPedidos_Load(object sender, EventArgs e)
         {
             AtualizarGridProdutos();
-        }
+            CarregarDadosPedidos();
 
+        }
+        private void CarregarDadosPedidos()
+        {
+            dataPedidos.AutoGenerateColumns = true;
+            dataPedidos.DataSource = PedidoUtils.CarregarPedidos();
+        }
         private void btnBuscarCliente_Click(object sender, EventArgs e)
         {
             string cpf = mskCpf.Text.Trim();
@@ -151,6 +160,8 @@ namespace P2
             PedidoUtils.SalvarPedido(codigoPedido, cpf, nomeCliente, itens);
             MessageBox.Show("Pedido salvo com sucesso!");
             LimparCampos();
+            CarregarDadosPedidos();
+
         }
 
         private void LimparCampos()
@@ -163,6 +174,26 @@ namespace P2
             lblTotalPedido.Text = "Total: R$ 0,00";
             itens.Clear();
             dataGridItens.DataSource = null;
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if (dataPedidos.CurrentRow != null)
+            {
+                int codigoPedido = Convert.ToInt32(dataPedidos.CurrentRow.Cells["CodigoPedido"].Value);
+
+                var confirmar = MessageBox.Show($"Deseja realmente excluir o pedido {codigoPedido}?", "Confirmação", MessageBoxButtons.YesNo);
+                if (confirmar == DialogResult.Yes)
+                {
+                    PedidoUtils.ExcluirPedido(codigoPedido);
+                    CarregarDadosPedidos();
+                    MessageBox.Show("Pedido excluído com sucesso!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecione um pedido para excluir.");
+            }
         }
     }
 }
