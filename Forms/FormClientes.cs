@@ -14,7 +14,6 @@ namespace P2
             InitializeComponent();
         }
 
-        // Função modular para carregar os clientes no DataGridView
         private void AtualizarGridClientes()
         {
             try
@@ -199,7 +198,7 @@ namespace P2
 
                 MessageBox.Show("Cliente atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                AtualizarGridClientes(); // Atualiza a tabela
+                AtualizarGridClientes();
             }
             catch (Exception ex)
             {

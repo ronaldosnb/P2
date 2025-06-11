@@ -28,34 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
+            dataProdutos = new DataGridView();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             btncadastrar = new Button();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
+            txtDescricao = new TextBox();
+            txtPreco = new TextBox();
+            txtNome = new TextBox();
             button2 = new Button();
             btnAtualizar = new Button();
             btnBuscar = new Button();
             label4 = new Label();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            txtCodigo = new TextBox();
+            label5 = new Label();
+            ((System.ComponentModel.ISupportInitialize)dataProdutos).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView1
+            // dataProdutos
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(326, 56);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(462, 340);
-            dataGridView1.TabIndex = 0;
+            dataProdutos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataProdutos.Location = new Point(326, 56);
+            dataProdutos.Name = "dataProdutos";
+            dataProdutos.Size = new Size(462, 340);
+            dataProdutos.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 11.25F);
-            label1.Location = new Point(12, 125);
+            label1.Location = new Point(10, 158);
             label1.Name = "label1";
             label1.Size = new Size(74, 20);
             label1.TabIndex = 1;
@@ -65,7 +67,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11.25F);
-            label2.Location = new Point(12, 89);
+            label2.Location = new Point(10, 122);
             label2.Name = "label2";
             label2.Size = new Size(46, 20);
             label2.TabIndex = 2;
@@ -75,7 +77,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F);
-            label3.Location = new Point(12, 59);
+            label3.Location = new Point(10, 92);
             label3.Name = "label3";
             label3.Size = new Size(134, 20);
             label3.TabIndex = 3;
@@ -84,36 +86,37 @@
             // btncadastrar
             // 
             btncadastrar.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btncadastrar.Location = new Point(12, 164);
+            btncadastrar.Location = new Point(10, 197);
             btncadastrar.Name = "btncadastrar";
             btncadastrar.Size = new Size(91, 35);
             btncadastrar.TabIndex = 4;
             btncadastrar.Text = "Cadastrar";
             btncadastrar.UseVisualStyleBackColor = true;
+            btncadastrar.Click += btncadastrar_Click;
             // 
-            // textBox1
+            // txtDescricao
             // 
-            textBox1.Font = new Font("Segoe UI", 11.25F);
-            textBox1.Location = new Point(84, 122);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(236, 27);
-            textBox1.TabIndex = 5;
+            txtDescricao.Font = new Font("Segoe UI", 11.25F);
+            txtDescricao.Location = new Point(82, 155);
+            txtDescricao.Name = "txtDescricao";
+            txtDescricao.Size = new Size(236, 27);
+            txtDescricao.TabIndex = 5;
             // 
-            // textBox2
+            // txtPreco
             // 
-            textBox2.Font = new Font("Segoe UI", 11.25F);
-            textBox2.Location = new Point(55, 89);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(265, 27);
-            textBox2.TabIndex = 6;
+            txtPreco.Font = new Font("Segoe UI", 11.25F);
+            txtPreco.Location = new Point(53, 122);
+            txtPreco.Name = "txtPreco";
+            txtPreco.Size = new Size(265, 27);
+            txtPreco.TabIndex = 6;
             // 
-            // textBox3
+            // txtNome
             // 
-            textBox3.Font = new Font("Segoe UI", 11.25F);
-            textBox3.Location = new Point(140, 56);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(180, 27);
-            textBox3.TabIndex = 7;
+            txtNome.Font = new Font("Segoe UI", 11.25F);
+            txtNome.Location = new Point(138, 89);
+            txtNome.Name = "txtNome";
+            txtNome.Size = new Size(180, 27);
+            txtNome.TabIndex = 7;
             // 
             // button2
             // 
@@ -128,7 +131,7 @@
             // btnAtualizar
             // 
             btnAtualizar.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAtualizar.Location = new Point(206, 164);
+            btnAtualizar.Location = new Point(204, 197);
             btnAtualizar.Name = "btnAtualizar";
             btnAtualizar.Size = new Size(91, 35);
             btnAtualizar.TabIndex = 9;
@@ -138,7 +141,7 @@
             // btnBuscar
             // 
             btnBuscar.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnBuscar.Location = new Point(109, 164);
+            btnBuscar.Location = new Point(107, 197);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(91, 35);
             btnBuscar.TabIndex = 10;
@@ -155,43 +158,65 @@
             label4.TabIndex = 11;
             label4.Text = "CRUD PRODUTOS";
             // 
+            // txtCodigo
+            // 
+            txtCodigo.Location = new Point(74, 56);
+            txtCodigo.Name = "txtCodigo";
+            txtCodigo.Size = new Size(244, 23);
+            txtCodigo.TabIndex = 12;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 11.25F);
+            label5.Location = new Point(10, 59);
+            label5.Name = "label5";
+            label5.Size = new Size(58, 20);
+            label5.TabIndex = 13;
+            label5.Text = "Codigo";
+            // 
             // FormProdutos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label5);
+            Controls.Add(txtCodigo);
             Controls.Add(label4);
             Controls.Add(btnBuscar);
             Controls.Add(btnAtualizar);
             Controls.Add(button2);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(txtNome);
+            Controls.Add(txtPreco);
+            Controls.Add(txtDescricao);
             Controls.Add(btncadastrar);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(dataGridView1);
+            Controls.Add(dataProdutos);
             Name = "FormProdutos";
             Text = "FormProdutos";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Load += FormProdutos_Load;
+            ((System.ComponentModel.ISupportInitialize)dataProdutos).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dataGridView1;
+        private DataGridView dataProdutos;
         private Label label1;
         private Label label2;
         private Label label3;
         private Button btncadastrar;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
+        private TextBox txtDescricao;
+        private TextBox txtPreco;
+        private TextBox txtNome;
         private Button button2;
         private Button btnAtualizar;
         private Button btnBuscar;
         private Label label4;
+        private TextBox txtCodigo;
+        private Label label5;
     }
 }

@@ -363,7 +363,75 @@ namespace P2.Functions
             linhas.Insert(0, cabecalho);
             File.WriteAllLines(caminhoArquivo, linhas);
         }
+        public static void CadastrarProduto(string codigo, string nome, string preco, string descricao)
+        {
+            string pasta = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database");
+            string caminho = Path.Combine(pasta, "produtos.csv");
 
+            if (!Directory.Exists(pasta))
+                Directory.CreateDirectory(pasta);
+
+            bool novoArquivo = !File.Exists(caminho);
+
+            using (StreamWriter writer = new StreamWriter(caminho, true))
+            {
+                if (novoArquivo)
+                {
+                    writer.WriteLine("Codigo;Nome;Preco;Descricao");
+                }
+
+                writer.WriteLine($"{codigo};{nome};{preco};{descricao}");
+            }
+        }
+        public static bool ProdutoJaExiste(string codigo)
+        {
+            string caminho = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database", "produtos.csv");
+
+            if (!File.Exists(caminho))
+                return false;
+
+            var linhas = File.ReadAllLines(caminho).Skip(1); // Pula o cabeçalho
+
+            foreach (var linha in linhas)
+            {
+                var dados = linha.Split(';');
+                if (dados.Length > 0 && dados[0] == codigo)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static DataTable CarregarProdutos()
+        {
+            string caminho = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database", "produtos.csv");
+            DataTable tabela = new DataTable();
+
+            tabela.Columns.Add("Codigo");
+            tabela.Columns.Add("Nome");
+            tabela.Columns.Add("Preco");
+            tabela.Columns.Add("Descricao");
+
+            if (!File.Exists(caminho))
+                return tabela;
+
+            var linhas = File.ReadAllLines(caminho);
+
+            // Pula o cabeçalho
+            foreach (var linha in linhas.Skip(1))
+            {
+                var dados = linha.Split(';');
+
+                if (dados.Length >= 4)
+                {
+                    tabela.Rows.Add(dados[0], dados[1], dados[2], dados[3]);
+                }
+            }
+
+            return tabela;
+        }
 
     }
 }
