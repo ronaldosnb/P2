@@ -49,7 +49,7 @@ namespace P2.Functions
             List<string> linhas = File.ReadAllLines(caminhoArquivo).ToList();
             bool atualizado = false;
 
-            for (int i = 1; i < linhas.Count; i++) // Assume que há cabeçalho
+            for (int i = 1; i < linhas.Count; i++) 
             {
                 string[] partes = linhas[i].Split(';');
 
@@ -70,14 +70,12 @@ namespace P2.Functions
             return false;
         }
 
-        // ✅ Salva novo usuário no CSV
         public static bool SalvarUsuario(string usuario, string senha)
         {
             string caminhoArquivo = Path.Combine("Database", "usuarios.csv");
 
             try
             {
-                // Cria o arquivo com cabeçalho se não existir
                 if (!File.Exists(caminhoArquivo))
                 {
                     Directory.CreateDirectory("Database");
@@ -90,7 +88,7 @@ namespace P2.Functions
                     var partes = linha.Split(';');
                     if (partes.Length >= 1 && partes[0].Equals(usuario, StringComparison.OrdinalIgnoreCase))
                     {
-                        return false; // Usuário já existe
+                        return false; 
                     }
                 }
 
@@ -105,7 +103,6 @@ namespace P2.Functions
             }
         }
 
-        // ✅ Carrega qualquer .csv em um DataTable
         public static DataTable CarregarCsvComoDataTable(string caminhoArquivo, char separador = ';')
         {
             DataTable tabela = new DataTable();
@@ -213,6 +210,81 @@ namespace P2.Functions
             return false;
         }
 
+        private static string caminhoPasta = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database");
+        private static string caminhoArquivo = Path.Combine(caminhoPasta, "clientes.csv");
+
+        public static void CadastrarCliente(
+            string nome, string cpf, string email, string whatsapp, string telefone,
+            string cep, string logradouro, string numero, string bairro,
+            string cidade, string estado)
+        {
+            try
+            {
+                if (!Directory.Exists(caminhoPasta))
+                    Directory.CreateDirectory(caminhoPasta);
+
+                if (!File.Exists(caminhoArquivo))
+                {
+                    using (StreamWriter sw = File.CreateText(caminhoArquivo))
+                    {
+                        sw.WriteLine("Nome;CPF;Email;WhatsApp;Telefone;CEP;Logradouro;Número;Bairro;Cidade;Estado");
+                    }
+                }
+
+                using (StreamWriter sw = File.AppendText(caminhoArquivo))
+                {
+                    sw.WriteLine($"{nome};{cpf};{email};{whatsapp};{telefone};{cep};{logradouro};{numero};{bairro};{cidade};{estado}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao cadastrar cliente: " + ex.Message);
+            }
+        }
+
+        public static DataTable ListarClientes()
+        {
+            DataTable tabela = new DataTable();
+
+            try
+            {
+                string caminhoPasta = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database");
+                string caminhoArquivo = Path.Combine(caminhoPasta, "clientes.csv");
+
+                if (!File.Exists(caminhoArquivo))
+                    return tabela; // Retorna tabela vazia se não existir
+
+                using (StreamReader sr = new StreamReader(caminhoArquivo))
+                {
+                    bool primeiraLinha = true;
+
+                    while (!sr.EndOfStream)
+                    {
+                        string linha = sr.ReadLine();
+                        string[] campos = linha.Split(';');
+
+                        if (primeiraLinha)
+                        {
+                            // Adiciona colunas
+                            foreach (string campo in campos)
+                                tabela.Columns.Add(campo);
+
+                            primeiraLinha = false;
+                        }
+                        else
+                        {
+                            tabela.Rows.Add(campos);
+                        }
+                    }
+                }
+
+                return tabela;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao listar clientes: " + ex.Message);
+            }
+        }
 
     }
 }

@@ -23,7 +23,7 @@ namespace P2
 
                 FormPrincipal formPrincipal = new FormPrincipal(usuario);
                 formPrincipal.Show();
-                this.Hide();
+                
             }
             else
             {
