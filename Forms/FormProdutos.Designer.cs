@@ -36,9 +36,8 @@
             txtDescricao = new TextBox();
             txtPreco = new TextBox();
             txtNome = new TextBox();
-            button2 = new Button();
+            btnExcluir = new Button();
             btnAtualizar = new Button();
-            btnBuscar = new Button();
             label4 = new Label();
             txtCodigo = new TextBox();
             label5 = new Label();
@@ -52,6 +51,7 @@
             dataProdutos.Name = "dataProdutos";
             dataProdutos.Size = new Size(462, 340);
             dataProdutos.TabIndex = 0;
+            dataProdutos.SelectionChanged += dataProdutos_SelectionChanged;
             // 
             // label1
             // 
@@ -118,35 +118,27 @@
             txtNome.Size = new Size(180, 27);
             txtNome.TabIndex = 7;
             // 
-            // button2
+            // btnExcluir
             // 
-            button2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(326, 402);
-            button2.Name = "button2";
-            button2.Size = new Size(110, 36);
-            button2.TabIndex = 8;
-            button2.Text = "Deletar";
-            button2.UseVisualStyleBackColor = true;
+            btnExcluir.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnExcluir.Location = new Point(326, 402);
+            btnExcluir.Name = "btnExcluir";
+            btnExcluir.Size = new Size(110, 36);
+            btnExcluir.TabIndex = 8;
+            btnExcluir.Text = "Excluir";
+            btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += button2_Click;
             // 
             // btnAtualizar
             // 
             btnAtualizar.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAtualizar.Location = new Point(204, 197);
+            btnAtualizar.Location = new Point(107, 197);
             btnAtualizar.Name = "btnAtualizar";
             btnAtualizar.Size = new Size(91, 35);
             btnAtualizar.TabIndex = 9;
             btnAtualizar.Text = "Atualizar";
             btnAtualizar.UseVisualStyleBackColor = true;
-            // 
-            // btnBuscar
-            // 
-            btnBuscar.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnBuscar.Location = new Point(107, 197);
-            btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(91, 35);
-            btnBuscar.TabIndex = 10;
-            btnBuscar.Text = "Buscar";
-            btnBuscar.UseVisualStyleBackColor = true;
+            btnAtualizar.Click += btnAtualizar_Click;
             // 
             // label4
             // 
@@ -183,9 +175,8 @@
             Controls.Add(label5);
             Controls.Add(txtCodigo);
             Controls.Add(label4);
-            Controls.Add(btnBuscar);
             Controls.Add(btnAtualizar);
-            Controls.Add(button2);
+            Controls.Add(btnExcluir);
             Controls.Add(txtNome);
             Controls.Add(txtPreco);
             Controls.Add(txtDescricao);
@@ -212,9 +203,8 @@
         private TextBox txtDescricao;
         private TextBox txtPreco;
         private TextBox txtNome;
-        private Button button2;
+        private Button btnExcluir;
         private Button btnAtualizar;
-        private Button btnBuscar;
         private Label label4;
         private TextBox txtCodigo;
         private Label label5;

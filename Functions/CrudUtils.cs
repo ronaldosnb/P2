@@ -433,5 +433,61 @@ namespace P2.Functions
             return tabela;
         }
 
+        public static void ExcluirProduto(string codigo)
+        {
+            string caminho = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database", "produtos.csv");
+
+            if (!File.Exists(caminho))
+                throw new FileNotFoundException("Arquivo de produtos não encontrado.");
+
+            var linhas = File.ReadAllLines(caminho).ToList();
+            if (linhas.Count <= 1)
+                return; // Só tem cabeçalho
+
+            // Mantém cabeçalho
+            var novasLinhas = new List<string> { linhas[0] };
+
+            foreach (var linha in linhas.Skip(1))
+            {
+                var dados = linha.Split(';');
+                if (dados.Length >= 1 && dados[0] != codigo)
+                {
+                    novasLinhas.Add(linha);
+                }
+            }
+
+            File.WriteAllLines(caminho, novasLinhas);
+        }
+
+        public static void AtualizarProduto(string codigo, string novoNome, string novoPreco, string novaDescricao)
+        {
+            string caminho = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database", "produtos.csv");
+
+            if (!File.Exists(caminho))
+                throw new FileNotFoundException("Arquivo de produtos não encontrado.");
+
+            var linhas = File.ReadAllLines(caminho).ToList();
+            var novasLinhas = new List<string> { linhas[0] };
+
+            foreach (var linha in linhas.Skip(1))
+            {
+                var dados = linha.Split(';');
+
+                if (dados.Length >= 4 && dados[0] == codigo)
+                {
+                    // Substitui pelos novos dados
+                    string novaLinha = $"{codigo};{novoNome};{novoPreco};{novaDescricao}";
+                    novasLinhas.Add(novaLinha);
+                }
+                else
+                {
+                    novasLinhas.Add(linha);
+                }
+            }
+
+            File.WriteAllLines(caminho, novasLinhas);
+        }
+
+
     }
 }

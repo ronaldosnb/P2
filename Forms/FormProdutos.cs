@@ -29,6 +29,22 @@ namespace P2
             }
         }
 
+        private void dataProdutos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataProdutos.SelectedRows.Count > 0)
+            {
+                var linha = dataProdutos.SelectedRows[0];
+
+                txtCodigo.Text = linha.Cells["Codigo"].Value.ToString();
+                txtNome.Text = linha.Cells["Nome"].Value.ToString();
+                txtPreco.Text = linha.Cells["Preco"].Value.ToString();
+                txtDescricao.Text = linha.Cells["Descricao"].Value.ToString();
+
+                txtCodigo.Enabled = false;
+            }
+        }
+
+
 
         private void FormProdutos_Load(object sender, EventArgs e)
         {
@@ -87,6 +103,72 @@ namespace P2
             AtualizarGridProdutos();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataProdutos.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Selecione um produto para excluir.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                string codigoSelecionado = dataProdutos.SelectedRows[0].Cells["Codigo"].Value.ToString();
+
+                DialogResult resultado = MessageBox.Show("Tem certeza que deseja excluir este produto?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resultado == DialogResult.Yes)
+                {
+                    CrudUtils.ExcluirProduto(codigoSelecionado);
+                    MessageBox.Show("Produto excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    AtualizarGridProdutos();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao excluir produto: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnAtualizar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string codigo = txtCodigo.Text.Trim();
+                string nome = txtNome.Text.Trim();
+                string precoTexto = txtPreco.Text.Trim();
+                string descricao = txtDescricao.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(codigo) ||
+                    string.IsNullOrWhiteSpace(nome) ||
+                    string.IsNullOrWhiteSpace(precoTexto) ||
+                    string.IsNullOrWhiteSpace(descricao))
+                {
+                    MessageBox.Show("Preencha todos os campos!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!float.TryParse(precoTexto, out float preco))
+                {
+                    MessageBox.Show("O preço deve ser um número válido!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                CrudUtils.AtualizarProduto(codigo, nome, precoTexto, descricao);
+
+                MessageBox.Show("Produto atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Atualiza a tabela e limpa os campos
+                AtualizarGridProdutos();
+                txtCodigo.Clear();
+                txtNome.Clear();
+                txtPreco.Clear();
+                txtDescricao.Clear();
+                txtCodigo.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao atualizar produto: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
