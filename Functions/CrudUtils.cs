@@ -252,11 +252,12 @@ namespace P2.Functions
                 string caminhoArquivo = Path.Combine(caminhoPasta, "clientes.csv");
 
                 if (!File.Exists(caminhoArquivo))
-                    return tabela; // Retorna tabela vazia se não existir
+                    return tabela;
 
                 using (StreamReader sr = new StreamReader(caminhoArquivo))
                 {
                     bool primeiraLinha = true;
+                    int colunasEsperadas = 0;
 
                     while (!sr.EndOfStream)
                     {
@@ -265,15 +266,24 @@ namespace P2.Functions
 
                         if (primeiraLinha)
                         {
-                            // Adiciona colunas
-                            foreach (string campo in campos)
-                                tabela.Columns.Add(campo);
-
+                            foreach (string coluna in campos)
+                            {
+                                tabela.Columns.Add(coluna);
+                            }
+                            colunasEsperadas = campos.Length;
                             primeiraLinha = false;
                         }
                         else
                         {
-                            tabela.Rows.Add(campos);
+                            if (campos.Length == colunasEsperadas)
+                            {
+                                tabela.Rows.Add(campos);
+                            }
+                            else
+                            {
+                                // pula linha com número incorreto de campos
+                                continue;
+                            }
                         }
                     }
                 }
