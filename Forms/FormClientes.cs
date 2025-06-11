@@ -129,5 +129,114 @@ namespace P2
             // Atualiza o DataGridView ao carregar o formulário
             AtualizarGridClientes();
         }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if (dataClientes.SelectedRows.Count > 0)
+            {
+                DialogResult confirmacao = MessageBox.Show(
+                    "Tem certeza que deseja excluir o cliente selecionado?",
+                    "Confirmar exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (confirmacao == DialogResult.Yes)
+                {
+                    try
+                    {
+                        // Pega o CPF da linha selecionada (coluna 1)
+                        string cpf = dataClientes.SelectedRows[0].Cells[1].Value.ToString();
+
+                        CrudUtils.ExcluirCliente(cpf);
+                        MessageBox.Show("Cliente excluído com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        AtualizarGridClientes(); // Atualiza o grid
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro ao excluir cliente: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecione um cliente para excluir.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnAtualizar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nome = txtNome.Text.Trim();
+                string cpf = mskCpf.Text.Trim();
+                string email = txtEmail.Text.Trim();
+                string whatsapp = mskWhatsapp.Text.Trim();
+                string telefone = mskTelefone.Text.Trim();
+                string cep = mskCep.Text.Trim();
+                string logradouro = txtLogradouro.Text.Trim();
+                string numero = txtNumero.Text.Trim();
+                string bairro = txtBairro.Text.Trim();
+                string cidade = txtCidade.Text.Trim();
+                string estado = txtEstado.Text.Trim();
+
+                // Verifica campos obrigatórios
+                if (string.IsNullOrWhiteSpace(nome) ||
+                    string.IsNullOrWhiteSpace(cpf) ||
+                    string.IsNullOrWhiteSpace(email) ||
+                    string.IsNullOrWhiteSpace(whatsapp) ||
+                    string.IsNullOrWhiteSpace(telefone) ||
+                    string.IsNullOrWhiteSpace(cep) ||
+                    string.IsNullOrWhiteSpace(logradouro) ||
+                    string.IsNullOrWhiteSpace(numero) ||
+                    string.IsNullOrWhiteSpace(bairro) ||
+                    string.IsNullOrWhiteSpace(cidade) ||
+                    string.IsNullOrWhiteSpace(estado))
+                {
+                    MessageBox.Show("Preencha todos os campos para atualizar.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                CrudUtils.AtualizarCliente(cpf, nome, email, whatsapp, telefone,
+                                            cep, logradouro, numero, bairro, cidade, estado);
+
+                MessageBox.Show("Cliente atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                AtualizarGridClientes(); // Atualiza a tabela
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao atualizar cliente: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            txtNome.Clear();
+            mskCpf.Clear();
+            txtEmail.Clear();
+            mskWhatsapp.Clear();
+            mskTelefone.Clear();
+            mskCep.Clear();
+            txtLogradouro.Clear();
+            txtNumero.Clear();
+            txtBairro.Clear();
+            txtCidade.Clear();
+            txtEstado.Clear();
+
+        }
+
+        private void dataClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataClientes.Rows[e.RowIndex];
+
+                txtNome.Text = row.Cells[0].Value?.ToString();
+                mskCpf.Text = row.Cells[1].Value?.ToString();
+                txtEmail.Text = row.Cells[2].Value?.ToString();
+                mskWhatsapp.Text = row.Cells[3].Value?.ToString();
+                mskTelefone.Text = row.Cells[4].Value?.ToString();
+                mskCep.Text = row.Cells[5].Value?.ToString();
+                txtLogradouro.Text = row.Cells[6].Value?.ToString();
+                txtNumero.Text = row.Cells[7].Value?.ToString();
+                txtBairro.Text = row.Cells[8].Value?.ToString();
+                txtCidade.Text = row.Cells[9].Value?.ToString();
+                txtEstado.Text = row.Cells[10].Value?.ToString();
+            }
+        }
     }
 }

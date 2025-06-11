@@ -296,5 +296,74 @@ namespace P2.Functions
             }
         }
 
+        public static void ExcluirCliente(string cpf)
+        {
+            string caminhoPasta = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database");
+            string caminhoArquivo = Path.Combine(caminhoPasta, "clientes.csv");
+
+            if (!File.Exists(caminhoArquivo))
+                throw new FileNotFoundException("Arquivo de clientes não encontrado.");
+
+            var linhas = File.ReadAllLines(caminhoArquivo).ToList();
+            if (linhas.Count <= 1)
+                return;
+
+            // Cabeçalho
+            var cabecalho = linhas[0];
+            linhas.RemoveAt(0); // Remove o cabeçalho da lista temporariamente
+
+            // Remove a linha onde o CPF for igual
+            var novaLista = linhas.Where(l => !l.Split(';')[1].Equals(cpf)).ToList(); // índice 1 é o CPF
+
+            // Adiciona o cabeçalho de volta e salva
+            novaLista.Insert(0, cabecalho);
+            File.WriteAllLines(caminhoArquivo, novaLista);
+        }
+        public static void AtualizarCliente(
+        string cpf,
+        string nome,
+        string email,
+        string whatsapp,
+        string telefone,
+        string cep,
+        string logradouro,
+        string numero,
+        string bairro,
+        string cidade,
+        string estado)
+        {
+            string caminhoPasta = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database");
+            string caminhoArquivo = Path.Combine(caminhoPasta, "clientes.csv");
+
+            if (!File.Exists(caminhoArquivo))
+                throw new FileNotFoundException("Arquivo de clientes não encontrado.");
+
+            var linhas = File.ReadAllLines(caminhoArquivo).ToList();
+            if (linhas.Count <= 1)
+                throw new Exception("Nenhum cliente encontrado.");
+
+            var cabecalho = linhas[0];
+            linhas.RemoveAt(0);
+
+            for (int i = 0; i < linhas.Count; i++)
+            {
+                string[] campos = linhas[i].Split(';');
+
+                if (campos.Length > 1 && campos[1] == cpf)
+                {
+                    linhas[i] = string.Join(";", new string[]
+                    {
+                nome, cpf, email, whatsapp, telefone,
+                cep, logradouro, numero, bairro, cidade, estado
+                    });
+                    break;
+                }
+            }
+
+            linhas.Insert(0, cabecalho);
+            File.WriteAllLines(caminhoArquivo, linhas);
+        }
+
+
     }
 }

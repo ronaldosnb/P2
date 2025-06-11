@@ -54,6 +54,7 @@
             mskWhatsapp = new MaskedTextBox();
             mskCep = new MaskedTextBox();
             btnExcluir = new Button();
+            btnAtualizar = new Button();
             ((System.ComponentModel.ISupportInitialize)dataClientes).BeginInit();
             SuspendLayout();
             // 
@@ -65,6 +66,7 @@
             dataClientes.RowHeadersWidth = 51;
             dataClientes.Size = new Size(585, 567);
             dataClientes.TabIndex = 0;
+            dataClientes.CellClick += dataClientes_CellContentClick;
             // 
             // label1
             // 
@@ -297,12 +299,24 @@
             btnExcluir.TabIndex = 30;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
+            // 
+            // btnAtualizar
+            // 
+            btnAtualizar.Location = new Point(169, 416);
+            btnAtualizar.Name = "btnAtualizar";
+            btnAtualizar.Size = new Size(149, 43);
+            btnAtualizar.TabIndex = 31;
+            btnAtualizar.Text = "Atualizar";
+            btnAtualizar.UseVisualStyleBackColor = true;
+            btnAtualizar.Click += btnAtualizar_Click;
             // 
             // FormClientes
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1159, 633);
+            Controls.Add(btnAtualizar);
             Controls.Add(btnExcluir);
             Controls.Add(mskCep);
             Controls.Add(mskWhatsapp);
@@ -366,5 +380,6 @@
         private MaskedTextBox mskWhatsapp;
         private MaskedTextBox mskCep;
         private Button btnExcluir;
+        private Button btnAtualizar;
     }
 }
