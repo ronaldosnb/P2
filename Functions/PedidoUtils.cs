@@ -16,13 +16,13 @@ namespace P2.Functions
             decimal valorTotal = itens.Sum(i => i.Subtotal);
 
             using (StreamWriter sw = File.AppendText(pedidosPath))
-                sw.WriteLine($"{codigoPedido};{cpf};{nomeCliente};{valorTotal}");
+                sw.WriteLine($"{codigoPedido};{cpf};{nomeCliente};{valorTotal.ToString(CultureInfo.InvariantCulture)}");
 
             using (StreamWriter sw = File.AppendText(itensPath))
             {
                 foreach (var item in itens)
                 {
-                    sw.WriteLine($"{codigoPedido};{item.CodigoProduto};{item.NomeProduto};{item.Preco};{item.Quantidade};{item.Subtotal}");
+                    sw.WriteLine($"{codigoPedido};{item.CodigoProduto};{item.NomeProduto};{item.Preco.ToString(CultureInfo.InvariantCulture)};{item.Quantidade};{item.Subtotal.ToString(CultureInfo.InvariantCulture)}");
                 }
             }
         }
@@ -34,40 +34,42 @@ namespace P2.Functions
             if (!File.Exists(pedidosPath))
                 return listaPedidos;
 
-            var linhas = File.ReadAllLines(pedidosPath);
+            var linhas = File.ReadAllLines(pedidosPath).Skip(1); // Pular cabeçalho
 
-            for (int i = 1; i < linhas.Length; i++) // pula cabeçalho
+            foreach (var linha in linhas)
             {
-                var colunas = linhas[i].Split(';');
+                var colunas = linha.Split(';');
 
                 if (colunas.Length >= 4 &&
                     int.TryParse(colunas[0], out int codigo) &&
                     decimal.TryParse(colunas[3], NumberStyles.Any, CultureInfo.InvariantCulture, out decimal total))
                 {
-                    var pedido = new Pedido
+                    listaPedidos.Add(new Pedido
                     {
                         CodigoPedido = codigo,
                         CPFCliente = colunas[1],
                         NomeCliente = colunas[2],
                         ValorTotal = total
-                    };
-
-                    listaPedidos.Add(pedido);
+                    });
                 }
             }
 
             return listaPedidos;
         }
+
         public static void ExcluirPedido(int codigoPedido)
         {
-            // Remove do pedidos.csv
+            // Remove do pedidos.csv (preserva cabeçalho)
             var linhasPedidos = File.ReadAllLines(pedidosPath).ToList();
-            linhasPedidos = linhasPedidos
+            var cabecalho = linhasPedidos.First();
+            var novasLinhas = linhasPedidos
+                .Skip(1)
                 .Where(l => !l.StartsWith(codigoPedido + ";"))
                 .ToList();
-            File.WriteAllLines(pedidosPath, linhasPedidos);
+            novasLinhas.Insert(0, cabecalho);
+            File.WriteAllLines(pedidosPath, novasLinhas);
 
-            // Remove os itens do itens_pedido.csv
+            // Remove os itens do itens_pedido.csv (não tem cabeçalho)
             var linhasItens = File.ReadAllLines(itensPath).ToList();
             linhasItens = linhasItens
                 .Where(l => !l.StartsWith(codigoPedido + ";"))
@@ -75,9 +77,65 @@ namespace P2.Functions
             File.WriteAllLines(itensPath, linhasItens);
         }
 
+        public static List<Pedido> BuscarPedidosPorCpf(string cpf)
+        {
+            var pedidos = new List<Pedido>();
 
+            if (!File.Exists(pedidosPath))
+                return pedidos;
 
+            var linhas = File.ReadAllLines(pedidosPath).Skip(1); // pular cabeçalho
+
+            foreach (var linha in linhas)
+            {
+                var col = linha.Split(';');
+                if (col.Length >= 4 && col[1] == cpf)
+                {
+                    pedidos.Add(new Pedido
+                    {
+                        CodigoPedido = int.Parse(col[0]),
+                        CPFCliente = col[1],
+                        NomeCliente = col[2],
+                        ValorTotal = decimal.Parse(col[3], CultureInfo.InvariantCulture)
+                    });
+                }
+            }
+
+            return pedidos;
+        }
+
+        public static List<ItemPedido> BuscarItensDoPedido(int codigoPedido)
+        {
+            var itens = new List<ItemPedido>();
+
+            if (!File.Exists(itensPath))
+                return itens;
+
+            var linhas = File.ReadAllLines(itensPath);
+
+            foreach (var linha in linhas)
+            {
+                var col = linha.Split(';');
+                if (col.Length >= 6 && int.TryParse(col[0], out int codigo) && codigo == codigoPedido)
+                {
+                    if (decimal.TryParse(col[3], NumberStyles.Any, CultureInfo.InvariantCulture, out decimal preco) &&
+                        int.TryParse(col[4], out int qtd))
+                    {
+                        itens.Add(new ItemPedido
+                        {
+                            CodigoProduto = col[1],
+                            NomeProduto = col[2],
+                            Preco = preco,
+                            Quantidade = qtd
+                        });
+                    }
+                }
+            }
+
+            return itens;
+        }
     }
+
     public class Pedido
     {
         public int CodigoPedido { get; set; }
@@ -94,6 +152,4 @@ namespace P2.Functions
         public int Quantidade { get; set; }
         public decimal Subtotal => Preco * Quantidade;
     }
-
-    
 }

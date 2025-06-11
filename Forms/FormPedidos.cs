@@ -195,5 +195,15 @@ namespace P2
                 MessageBox.Show("Selecione um pedido para excluir.");
             }
         }
+
+        private void lblNomeCliente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pedido_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
