@@ -1,5 +1,6 @@
 using System.Text;
 using P2.Functions;
+using static P2.FormPrincipal;
 
 namespace P2
 {
@@ -20,6 +21,7 @@ namespace P2
             if (acessoLiberado)
             {
                 MessageBox.Show("Login realizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Sessao.UsuarioLogado = txtUsuario.Text.Trim();
 
                 FormPrincipal formPrincipal = new FormPrincipal(usuario);
                 formPrincipal.Show();

@@ -20,11 +20,23 @@ namespace P2
             InitializeComponent();
             usuarioLogado = usuario;
         }
+        public static class Sessao
+        {
+            public static string UsuarioLogado { get; set; }
+        }
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
-            FormUsuarios form = new FormUsuarios();
-            form.ShowDialog();
+            if (Sessao.UsuarioLogado == "ADMIN")
+            {
+                FormUsuarios formUsuarios = new FormUsuarios();
+                formUsuarios.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Acesso restrito! Apenas o usuário ADMIN pode acessar esta funcionalidade.",
+                                "Permissão Negada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnClientes_Click(object sender, EventArgs e)
