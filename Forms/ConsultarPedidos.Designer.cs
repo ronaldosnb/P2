@@ -40,6 +40,8 @@
             mskCpf = new MaskedTextBox();
             lblNome = new Label();
             label2 = new Label();
+            lblTotal = new Label();
+            label4 = new Label();
             SuspendLayout();
             // 
             // listItens
@@ -51,7 +53,7 @@
             listItens.Margin = new Padding(3, 4, 3, 4);
             listItens.MultiSelect = false;
             listItens.Name = "listItens";
-            listItens.Size = new Size(489, 571);
+            listItens.Size = new Size(489, 522);
             listItens.TabIndex = 0;
             listItens.UseCompatibleStateImageBehavior = false;
             listItens.View = View.Details;
@@ -101,7 +103,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(30, 36);
             label1.Name = "label1";
-            label1.Size = new Size(44, 25);
+            label1.Size = new Size(33, 20);
             label1.TabIndex = 2;
             label1.Text = "CPF";
             // 
@@ -119,9 +121,9 @@
             // mskCpf
             // 
             mskCpf.Location = new Point(69, 34);
-            mskCpf.Mask = "000000000-00";
+            mskCpf.Mask = "000,000,000-00";
             mskCpf.Name = "mskCpf";
-            mskCpf.Size = new Size(168, 32);
+            mskCpf.Size = new Size(168, 27);
             mskCpf.TabIndex = 5;
             // 
             // lblNome
@@ -129,7 +131,7 @@
             lblNome.AutoSize = true;
             lblNome.Location = new Point(90, 132);
             lblNome.Name = "lblNome";
-            lblNome.Size = new Size(124, 25);
+            lblNome.Size = new Size(93, 20);
             lblNome.TabIndex = 6;
             lblNome.Text = "--------------";
             // 
@@ -138,15 +140,36 @@
             label2.AutoSize = true;
             label2.Location = new Point(12, 132);
             label2.Name = "label2";
-            label2.Size = new Size(72, 25);
+            label2.Size = new Size(56, 20);
             label2.TabIndex = 7;
             label2.Text = "cliente:";
             // 
+            // lblTotal
+            // 
+            lblTotal.AutoSize = true;
+            lblTotal.Location = new Point(551, 551);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(27, 20);
+            lblTotal.TabIndex = 8;
+            lblTotal.Text = "---";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(408, 551);
+            label4.Name = "label4";
+            label4.Size = new Size(137, 20);
+            label4.TabIndex = 9;
+            label4.Text = "Total dos produtos:";
+            label4.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // ConsultarPedidos
             // 
-            AutoScaleDimensions = new SizeF(11F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(914, 600);
+            Controls.Add(label4);
+            Controls.Add(lblTotal);
             Controls.Add(label2);
             Controls.Add(lblNome);
             Controls.Add(mskCpf);
@@ -176,5 +199,7 @@
         private ColumnHeader colProduto;
         private ColumnHeader colQuantidade;
         private ColumnHeader colSubtotal;
+        private Label lblTotal;
+        private Label label4;
     }
 }

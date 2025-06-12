@@ -22,6 +22,7 @@ namespace P2
 
             // Limpa os campos
             lblNome.Text = "";
+            lblTotal.Text = "R$ 0,00";
             listPedidos.Items.Clear();
             listItens.Items.Clear();
 
@@ -38,6 +39,7 @@ namespace P2
                 {
                     var item = new ListViewItem(pedido.CodigoPedido.ToString());
                     item.SubItems.Add(pedido.ValorTotal.ToString("C2", CultureInfo.CurrentCulture));
+                    item.Tag = pedido.CodigoPedido; // Salva o código no Tag
                     listPedidos.Items.Add(item);
                 }
             }
@@ -50,19 +52,28 @@ namespace P2
         private void listPedidos_SelectedIndexChanged(object sender, EventArgs e)
         {
             listItens.Items.Clear();
+            lblTotal.Text = "R$ 0,00";
 
             if (listPedidos.SelectedItems.Count > 0)
             {
-                int codigo = int.Parse(listPedidos.SelectedItems[0].Text);
+                var selectedItem = listPedidos.SelectedItems[0];
 
-                var itens = PedidoUtils.BuscarItensDoPedido(codigo);
-
-                foreach (var item in itens)
+                if (selectedItem.Tag is int codigo)
                 {
-                    var linha = new ListViewItem(item.NomeProduto);
-                    linha.SubItems.Add(item.Quantidade.ToString());
-                    linha.SubItems.Add(item.Subtotal.ToString("C2", CultureInfo.CurrentCulture));
-                    listItens.Items.Add(linha);
+                    var itens = PedidoUtils.BuscarItensDoPedido(codigo);
+                    decimal total = 0;
+
+                    foreach (var item in itens)
+                    {
+                        total += item.Subtotal;
+
+                        var linha = new ListViewItem(item.NomeProduto);
+                        linha.SubItems.Add(item.Quantidade.ToString());
+                        linha.SubItems.Add(item.Subtotal.ToString("C2", CultureInfo.CurrentCulture));
+                        listItens.Items.Add(linha);
+                    }
+
+                    lblTotal.Text = total.ToString("C2", CultureInfo.CurrentCulture);
                 }
             }
         }
