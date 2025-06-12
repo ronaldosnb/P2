@@ -259,7 +259,7 @@
             // 
             mskCpf.Location = new Point(49, 51);
             mskCpf.Margin = new Padding(3, 4, 3, 4);
-            mskCpf.Mask = "000.000.000-00";
+            mskCpf.Mask = "000,000,000-00";
             mskCpf.Name = "mskCpf";
             mskCpf.Size = new Size(332, 27);
             mskCpf.TabIndex = 26;
