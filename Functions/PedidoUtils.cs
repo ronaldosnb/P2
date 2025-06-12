@@ -59,7 +59,6 @@ namespace P2.Functions
 
         public static void ExcluirPedido(int codigoPedido)
         {
-            // Remove do pedidos.csv (preserva cabeçalho)
             var linhasPedidos = File.ReadAllLines(pedidosPath).ToList();
             var cabecalho = linhasPedidos.First();
             var novasLinhas = linhasPedidos
@@ -68,8 +67,7 @@ namespace P2.Functions
                 .ToList();
             novasLinhas.Insert(0, cabecalho);
             File.WriteAllLines(pedidosPath, novasLinhas);
-
-            // Remove os itens do itens_pedido.csv (não tem cabeçalho)
+            
             var linhasItens = File.ReadAllLines(itensPath).ToList();
             linhasItens = linhasItens
                 .Where(l => !l.StartsWith(codigoPedido + ";"))
@@ -84,7 +82,7 @@ namespace P2.Functions
             if (!File.Exists(pedidosPath))
                 return pedidos;
 
-            var linhas = File.ReadAllLines(pedidosPath).Skip(1); // pular cabeçalho
+            var linhas = File.ReadAllLines(pedidosPath).Skip(1); 
 
             foreach (var linha in linhas)
             {

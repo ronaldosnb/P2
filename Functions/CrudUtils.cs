@@ -309,14 +309,12 @@ namespace P2.Functions
             if (linhas.Count <= 1)
                 return;
 
-            // Cabeçalho
+            
             var cabecalho = linhas[0];
-            linhas.RemoveAt(0); // Remove o cabeçalho da lista temporariamente
+            linhas.RemoveAt(0); 
 
-            // Remove a linha onde o CPF for igual
-            var novaLista = linhas.Where(l => !l.Split(';')[1].Equals(cpf)).ToList(); // índice 1 é o CPF
+            var novaLista = linhas.Where(l => !l.Split(';')[1].Equals(cpf)).ToList(); 
 
-            // Adiciona o cabeçalho de volta e salva
             novaLista.Insert(0, cabecalho);
             File.WriteAllLines(caminhoArquivo, novaLista);
         }
@@ -391,7 +389,7 @@ namespace P2.Functions
             if (!File.Exists(caminho))
                 return false;
 
-            var linhas = File.ReadAllLines(caminho).Skip(1); // Pula o cabeçalho
+            var linhas = File.ReadAllLines(caminho).Skip(1); 
 
             foreach (var linha in linhas)
             {
@@ -420,7 +418,6 @@ namespace P2.Functions
 
             var linhas = File.ReadAllLines(caminho);
 
-            // Pula o cabeçalho
             foreach (var linha in linhas.Skip(1))
             {
                 var dados = linha.Split(';');
@@ -443,9 +440,8 @@ namespace P2.Functions
 
             var linhas = File.ReadAllLines(caminho).ToList();
             if (linhas.Count <= 1)
-                return; // Só tem cabeçalho
+                return; 
 
-            // Mantém cabeçalho
             var novasLinhas = new List<string> { linhas[0] };
 
             foreach (var linha in linhas.Skip(1))
@@ -476,7 +472,6 @@ namespace P2.Functions
 
                 if (dados.Length >= 4 && dados[0] == codigo)
                 {
-                    // Substitui pelos novos dados
                     string novaLinha = $"{codigo};{novoNome};{novoPreco};{novaDescricao}";
                     novasLinhas.Add(novaLinha);
                 }
