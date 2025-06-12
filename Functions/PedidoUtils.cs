@@ -34,7 +34,7 @@ namespace P2.Functions
             if (!File.Exists(pedidosPath))
                 return listaPedidos;
 
-            var linhas = File.ReadAllLines(pedidosPath).Skip(1); // Pular cabeçalho
+            var linhas = File.ReadAllLines(pedidosPath).Skip(1); 
 
             foreach (var linha in linhas)
             {

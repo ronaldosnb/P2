@@ -63,7 +63,7 @@ namespace P2
                     lblNomeCliente.Text = nomeCliente;
                     return;
                 }
-            }
+            } 
 
             MessageBox.Show("Cliente não encontrado.");
         }
